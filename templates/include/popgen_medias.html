@@ -1,0 +1,112 @@
+<!-- Start - Module:popgen - Template:<{$mode}> -->
+<script language="JavaScript"
+        type="text/javascript" 
+        src="<{$xoops_url}><{$script_link}>">
+</script>
+
+
+
+
+<div style="margin:6px; padding:6px; border:2px inset">
+<br /><br /><{$result}><br /><br />
+</div>
+
+<div align="center" class="itemHead">
+<!-- flooble Expandable Content box start -->
+	<a title="show/hide" id="selectone_link" href="javascript: void(0);" onclick="toggle(this, 'selectone');">[-]</a> <{$lg_see}>
+      | <a title="show/hide" id="select_url_link" href="javascript: void(0);" onclick="toggle(this, 'select_url');">[-]</a> <{$lg_url}>
+      | <a title="show/hide" id="select_options_link" href="javascript: void(0);" onclick="toggle(this, 'select_options');">[-]</a> <{$lg_options}>
+<br /><br />
+	<div id="selectone" style="padding: 3px;" align="center">
+	<form name="copy">
+	<input onclick="SelectIt(this.form.Obj)" type="button" name="copy" value="<{$lg_copy}>" /><br />
+	<textarea rows="10" cols="64" style="margin:6px; border:2px inset;" name="Obj" id="1" wrap="virtual"><{$result}></textarea>
+	</form>
+	</div>
+<{if !$is_code}><script type="text/javascript" language="javascript">toggle(getObject('selectone_link'), 'selectone');</script><{/if}>
+<!-- flooble Expandable Content box end  -->
+</div>
+
+
+<div id="select_url" style="padding: 3px;" align="center">
+	<form name="copy">
+	<input onclick="SelectIt(this.form.Obj)" type="button" name="copy" value="<{$lg_copy_url}> <{$lg_medias}>" /><br />
+	<textarea rows="1" cols="34" style="margin:6px; border:2px inset;" name="Obj" id="1" wrap="virtual"><{$image_url}></textarea>
+	</form>
+<{if !$is_url}><script type="text/javascript" language="javascript">toggle(getObject('select_url_link'), 'select_url');</script><{/if}>
+</div>
+
+
+<div id="select_options" style="padding: 3px;" align="center">
+
+<form action="" method="post">
+
+<div style="text-align:center;">
+<button type="submit"><{$lg_submit}></button>
+</div>
+
+<table style="border:2px inset; padding:6px; margin: 6px;">
+<tr>
+<td>
+      <b><{$lg_medias}></b>:<br /><br />
+
+</td><td>
+      <input type="text" name="media_dir" size="35" maxlength="256" value="<{$media_dir}>">
+
+</td><td colspan="2">
+      <select name="media" size="<{if count($media_list)<=20}>1<{else}>5<{/if}>" style="width:160px;">
+      <{foreach item=medias from=$media_list}>
+      <option value="<{$medias}>"<{if $medias==$media}> selected<{/if}>>	<{$medias}>	</option>
+      <{/foreach}>
+      </select><br />
+      [<{if $imagenav}><{$imagenum}>/<{$imagetotal}> <{$lg_images}>] <{$imagenav}><{else}><{$imagetotal}> <{$lg_medias}>]<{/if}>
+</td>
+</tr>
+
+<tr>
+<td>
+      <b><{$lg_media_url}></b>:
+</td><td colspan="3">
+      <input type="text" name="media_url" size="75" maxlength="256" value="<{$media_url}>">
+
+</td>
+</tr>
+
+<tr>
+<td><b><{$lg_size}></b>:</td>
+<td><input type="text" name="width" size="5" maxlength="5" value="<{$width}>"> x <input type="text" name="height" size="5" maxlength="5" value="<{$height}>"></td>
+<td><b><{$lg_align}></b></td>
+<td><select name="align" size="1" style="width:160px;">
+	    <option value="">			                                                </option>
+            <option value="left"<{if $align=='left'}> selected<{/if}>>	<{$lg_left}>	        </option>
+	    <option value="center"<{if $align=='center'}> selected<{/if}>>  <{$lg_center}>	</option>
+  	    <option value="right"<{if $align=='right'}> selected<{/if}>> 	<{$lg_right}>	</option>
+    </select></td>
+</tr>
+
+<tr>
+<td><b><{$lg_options}></b>: </td>
+<td><textarea rows="4" wrap="virtual" type="text" name="options" disabled readonly><{$options}></textarea></td>
+<td><b><{$lg_style}></b></td>
+<td><textarea rows="4" wrap="virtual" type="text" name="style"><{$style}></textarea></td>
+</tr>
+
+
+<tr>
+<td><b><{$lg_description}></b>:</td>
+<td colspan="3"><textarea rows="4" wrap="virtual" type="text" name="description"><{$description}></textarea></td>
+</tr>
+
+</table>
+
+<div style="text-align:center;">
+<button type="submit"><{$lg_submit}></button>
+</div>
+
+</form>
+
+
+<{if !$is_options}><script type="text/javascript" language="javascript">toggle(getObject('select_options_link'), 'select_options');</script> <{/if}>
+       </div>
+
+<!-- End - Module:popgen - Template:<{$mode}> -->

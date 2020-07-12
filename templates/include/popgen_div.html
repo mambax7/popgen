@@ -1,0 +1,443 @@
+<!-- Start - Module:popgen - Template:<{$mode}> -->
+<script language="JavaScript"
+        type="text/javascript" 
+        src="<{$xoops_url}><{$script_link}>">
+</script>
+
+
+
+
+<div style="margin:6px; padding:6px; border:2px inset">
+<br /><br /><{$code_display}><br /><br />
+</div>
+
+
+
+<div align="center" class="itemHead">
+<!-- flooble Expandable Content box start -->
+	<a title="show/hide" id="selectone_link" href="javascript: void(0);" onclick="toggle(this, 'selectone');">[-]</a> <{$lg_see}> | <a title="show/hide" id="select_options_link" href="javascript: void(0);" onclick="toggle(this, 'select_options');">[-]</a> <{$lg_options}>
+	<div id="selectone" style="padding: 3px;" align="center">
+	<form name="copy">
+	<input onclick="SelectIt(this.form.Obj)" type="button" name="copy" value="<{$lg_copy}>" /><br />
+	<textarea rows="10" cols="64" style="margin:6px; border:2px inset" name="Obj" id="1" wrap="virtual"><{$code_copy}></textarea>
+	</form>
+	</div>
+<{if !$is_code}><script type="text/javascript" language="javascript">toggle(getObject('selectone_link'), 'selectone');</script><{/if}>
+<!-- flooble Expandable Content box end  -->
+</div>
+
+
+
+	<div id="select_options" style="padding: 3px;" align="center">
+
+
+<form action="" method="post">
+
+<div style="text-align:center;">
+<button type="submit"><{$lg_submit}></button>
+</div>
+        
+
+<table class="outer" style="border:2px inset; padding:6px; margin: 6px;">
+
+<tr class="odd">
+      <th colspan="3"> <{$lg_content}> </th></tr>
+<tr class="odd">
+      <td width="33%">
+              <input type="text" name="class_name" size="32" maxlength="64" value="<{$v_class_name}>">
+      </td>
+      <td width="33%">
+      
+               <select name="type">
+			<option value="is_div"<{$s_div}>>	            <{$lg_divmode}>	</option>
+			<option value="is_fieldset"<{$s_fieldset}>>	    <{$lg_fieldsetmode}>	</option>
+			<option value="is_css"<{$s_css}>>	            <{$lg_stylesheetmode}>	</option>
+		</select>
+      </td>
+      <td width="33%">&nbsp;<b>{id} = </b>
+
+               <input type="text" name="id" size="15" maxlength="20" value="<{$v_id}>" />
+               
+      </td>
+
+</tr>
+
+<tr class="odd">
+       <td colspan="3"><textarea rows="12" cols="90%" wrap="virtual" type="text" name="description"><{$description}></textarea></td>
+
+</tr>
+<tr class="head"><th colspan="3"> <{$lg_size}></th></tr>
+
+<tr class="even">
+
+	<td>  &nbsp;<b><{$n_overflow}></b>
+
+               <select name="overflow">
+			<option value="">	                                        </option>
+			<option value="auto"<{$s_overflow_auto}>>	<{$lg_auto}>	</option>
+			<option value="visible"<{$s_overflow_visible}>>	<{$lg_visible}>	</option>
+			<option value="hidden"<{$s_overflow_hidden}>>	<{$lg_hidden}>	</option>
+                        <option value="scroll"<{$s_overflow_scroll}>>	<{$lg_scroll}>	</option>
+		</select>
+               
+        </td>
+
+	<td>  &nbsp;<b>* <{$n_width}></b>
+
+               <input type="text" name="width" size="20" maxlength="6" value="<{$v_width}>" />
+               
+        </td>
+
+	<td>  &nbsp;<b>* <{$n_height}></b>
+
+               <input type="text" name="height" size="20" maxlength="6" value="<{$v_height}>" />
+               
+        </td>
+</tr>
+
+
+
+<tr class="even">
+	<td>  &nbsp;<b><{$n_align}></b>
+
+               		<select name="align">
+			<option value="">		                                </option>
+			<option value="left"<{$s_align_left}>>	        <{$lg_left}>	</option>
+			<option value="center"<{$s_align_center}>>      <{$lg_center}>	</option>
+			<option value="right"<{$s_align_right}>> 	<{$lg_right}>	</option>
+			<option value="relative"<{$s_align_relative}>> 	<{$lg_relative}>	</option>
+			<option value="absolute"<{$s_align_absolute}>> 	<{$lg_absolute}>	</option>
+		</select>
+
+        </td>
+        
+        	<td>  &nbsp;<b>* <{$n_top}></b>
+
+               <input <{if $s_align_relative || $s_align_absolute}><{else}>style="background-color:lightgrey;color:grey;" <{/if}>
+                      type="text" name="top" size="20" maxlength="6" value="<{$v_top}>" />
+               
+        </td>
+
+	<td>  &nbsp;<b>* <{$n_left}></b>
+
+               <input <{if $s_align_relative || $s_align_absolute}><{else}>style="background-color:lightgrey;color:grey;" <{/if}>
+                      type="text" name="left" size="20" maxlength="6" value="<{$v_left}>" />
+
+        </td>
+</tr>
+
+<tr class="even">
+       	<td>  &nbsp;<b>* <{$n_margin}></b>
+
+               <input type="text" name="margin" size="20" maxlength="6" value="<{$v_margin}>" />
+               
+        </td>
+
+	<td>  &nbsp;<b>* <{$n_padding}></b>
+
+               <input type="text" name="padding" size="20" maxlength="6" value="<{$v_padding}>" />
+               
+        </td>
+
+	<td>  &nbsp;
+        </td>
+
+</tr>
+
+<tr><th colspan="3"> <{$lg_borders}> </th></tr>
+<tr class="odd">
+	<td>  &nbsp;<b><{$n_border_style}></b>
+
+              <select name="border_style">
+			<option value="">		        	        </option>
+			<option value="hidden"<{$s_border_style_hidden}>>	<{$lg_hidden}>	</option>
+			<option value="dotted"<{$s_border_style_dotted}>>       <{$lg_dotted}>	</option>
+			<option value="dashed"<{$s_border_style_dashed}>> 	<{$lg_dashed}>	</option>
+			<option value="solid"<{$s_border_style_solid}>> 	<{$lg_solid}>	</option>
+			<option value="double"<{$s_border_style_double}>> 	<{$lg_double}>	</option>
+			<option value="groove"<{$s_border_style_groove}>>	<{$lg_groove}>	</option>
+			<option value="ridge"<{$s_border_style_ridge}>> 	<{$lg_ridge}>	</option>
+ 			<option value="inset"<{$s_border_style_inset}>> 	<{$lg_inset}>	</option>
+			<option value="outset"<{$s_border_style_outset}>> 	<{$lg_outset}>	</option>
+
+		</select>
+               
+        </td>
+        
+       	<td>  &nbsp;<b>* <{$n_border_width}></b>
+
+               <input type="text" name="border_width" size="20" maxlength="6" value="<{$v_border_width}>" />
+               
+        </td>
+
+	<td>  &nbsp;<b><{$n_border_color}></b>
+
+               <input type="text" name="border_color" size="20" maxlength="12" value="<{$v_border_color}>" />
+
+        </td>
+
+</tr>
+
+<tr class="head"><th colspan="3"> <{$lg_font}> </th></tr>
+<tr class="even">
+	<td>  &nbsp;<b><{$n_font_family}></b>
+
+               	<input type="text" name="font_family" size="20" maxlength="64" value="<{$v_font_family}>" />
+               
+        </td>
+
+	<td>  &nbsp;<b>* <{$n_font_size}></b>
+
+               <input type="text" name="font_size" size="20" maxlength="6" value="<{$v_font_size}>" />
+
+        </td>
+
+	<td>  &nbsp;<b><{$n_font_style}></b>
+
+                <select name="font_style">
+			<option value="">	        </option>
+			<option value="italic"<{$s_font_style_italic}>>	<{$lg_italic}>	</option>
+		</select>
+               
+        </td>
+
+</tr>
+
+<tr class="even">
+	<td>  &nbsp;<b><{$n_font_variant}></b>
+               	<select name="font_variant">
+			<option value="">		                                </option>
+			<option value="small-caps"<{$s_font_variant_small_caps}>>	        <{$lg_small_caps}>	</option>
+		</select>
+
+        </td>
+        
+        	<td>  &nbsp;<b><{$n_font_weight}></b>
+
+               	<select name="font_weight">
+			<option value="">		                                </option>
+			<option value="bold"<{$s_font_weight_bold}>>	        <{$lg_bold}>	</option>
+		</select>
+               
+        </td>
+
+	<td>  &nbsp;<b><{$n_color}></b>
+
+               <input type="text" name="color" size="20" maxlength="20" value="<{$v_color}>" />
+        </td>
+
+</tr>
+
+<tr class="even">
+       	<td>  &nbsp;<b>* <{$n_text_align}></b>
+
+              <select name="text_align">
+			<option value="">		                                </option>
+			<option value="left"<{$s_text_align_left}>>	        <{$lg_left}>	</option>
+			<option value="center"<{$s_text_align_center}>>      <{$lg_center}>	</option>
+			<option value="right"<{$s_text_align_right}>> 	<{$lg_right}>	</option>
+			<option value="justify"<{$s_text_align_justify}>> 	<{$lg_justify}>	</option>
+		</select>
+               
+        </td>
+
+	<td>  &nbsp;<b>* <{$n_text_transform}></b>
+
+               	<select name="text_transform">
+			<option value="">		                                </option>
+			<option value="lowercase"<{$s_text_transform_lowercase}>>	        <{$lg_lowercase}>	</option>
+			<option value="capitalize"<{$s_text_transform_capitalize}>>      <{$lg_capitalize}>	</option>
+			<option value="uppercase"<{$s_text_transform_uppercase}>> 	<{$lg_uppercase}>	</option>
+		</select>
+               
+        </td>
+
+	<td>  &nbsp;<b><{$n_text_decoration}></b>
+
+               	<select name="text_decoration">
+			<option value="">		                                </option>
+			<option value="overline"<{$s_text_decoration_overline}>>	<{$lg_overline}>	    </option>
+			<option value="line-through"<{$s_text_decoration_line_through}>><{$lg_line_through}>	</option>
+			<option value="underline"<{$s_text_decoration_underline}>> 	<{$lg_underline}>	  </option>
+			<option value="blink"<{$s_text_decoration_blink}>> 	        <{$lg_blink}>	  </option>
+			<option value="underline overline"<{$s_text_decoration_underline_overline}>>	<{$lg_underline_overline}>	</option>
+		</select>
+
+        </td>
+
+</tr>
+
+<tr class="even">
+       	<td>  &nbsp;<b>* <{$n_text_indent}></b>
+
+              <input type="text" name="text_indent" size="20" maxlength="6" value="<{$v_text_indent}>" />
+               
+        </td>
+
+	<td>  &nbsp;<b>* <{$n_vertical_align}></b>
+
+               	<select name="vertical_align">
+			<option value="">		                                </option>
+			<option value="top"<{$s_vertical_align_left}>>	        <{$lg_top}>	</option>
+			<option value="middle"<{$s_vertical_align_center}>>      <{$lg_middle}>	</option>
+			<option value="text-bottom"<{$s_vertical_align_right}>> 	<{$lg_bottom}>	</option>
+		</select>
+               
+        </td>
+
+	<td>  &nbsp;<b><{$n_line_height}></b>
+
+               	<input type="text" name="line_height" size="20" maxlength="6" value="<{$v_line_height}>" />
+
+        </td>
+
+</tr>
+
+
+<tr><th colspan="3"> <{$lg_background}> </th></tr>
+<tr class="odd">
+	<td colspan="2">  &nbsp;<b><{$n_background}></b>
+               <input type="text" name="background" size="35" maxlength="256" value="<{$v_background}>" />
+
+              <select name="file" size="<{if count($file_list)<=20}>1<{else}>5<{/if}>" style="width:160px;" onchange="showImgSelected('current_image', 'file', '<{$v_background}>', '', '<{$xoops_url}>')" id="file">
+              <option value="">		                                </option>
+              <{foreach item=files from=$file_list}>
+              <option value="<{$files}>"<{if $files==$file}> selected<{/if}>>	<{$files}>	</option>
+              <{/foreach}>
+              </select><br />
+      [<{if $filenav}><{$filenum}>/<{$filetotal}> <{$lg_files}>] <{$filenav}><{else}><{$filetotal}> <{$lg_files}>]<{/if}>
+              
+              <div style="border: 2px inset grey; margin: 10px; background-color: white; overflow: auto; height: 120px; width: 95%; text-align: center;">
+                  <p>
+                  <img src="images/icon/blank.gif" name="current_image" id="current_image" alt="">
+                  </p>
+              </div>
+      </td>
+       	<td>  &nbsp;<b><{$n_background_color}></b>
+
+               <input type="text" name="background_color" size="20" maxlength="12" value="<{$v_background_color}>" />
+               
+        </td>
+
+
+</tr>
+
+<tr class="odd">
+
+	<td>  &nbsp;<b><{$n_background_position}></b>
+               <select name="background_position">
+			<option value="">		                	                                        </option>
+			<option value="top left"<{$s_background_position_top_left}>>	         <{$lg_top}> <{$lg_left}>	</option>
+			<option value="top center"<{$s_background_position_top_center}>>         <{$lg_top}> <{$lg_center}>	</option>
+			<option value="top right"<{$s_background_position_top_right}>> 	         <{$lg_top}> <{$lg_right}>	</option>
+			
+			<option value="center left"<{$s_background_position_center_left}>>	  <{$lg_middle}> <{$lg_left}>	</option>
+			<option value="center center"<{$s_background_position_center_center}>>    <{$lg_middle}> <{$lg_center}></option>
+			<option value="center right"<{$s_background_position_center_right}>> 	  <{$lg_middle}> <{$lg_right}>	</option>
+
+			<option value="bottom left"<{$s_background_position_bottom_left}>>	  <{$lg_bottom}> <{$lg_left}>	</option>
+			<option value="bottom center"<{$s_background_position_bottom_center}>>    <{$lg_bottom}> <{$lg_center}></option>
+			<option value="bottom right"<{$s_background_position_bottom_right}>> 	  <{$lg_bottom}> <{$lg_right}>	</option>
+		</select>
+
+
+        </td>
+
+	<td>  &nbsp;<b><{$n_background_repeat}></b>
+
+<!--               <input type="text" name="background_repeat" size="20" maxlength="12" value="<{$v_background_repeat}>"> -->
+               <select name="background_repeat">
+                        <option value="">		        	        </option>
+			<option value="no-repeat"<{$s_background_repeat_no_repeat}>>  	<{$lg_norepeat}>                </option>
+			<option value="repeat"<{$s_background_repeat_repeat}>>      <{$lg_repeat}>	</option>
+			<option value="repeat-x"<{$s_background_repeat_repeat_x}>>      <{$lg_x}>	</option>
+			<option value="repeat-y"<{$s_background_repeat_repeat_y}>> 	<{$lg_y}>	        </option>
+		</select>
+        </td>
+
+	<td>  &nbsp;<b><{$n_background_attachement}></b>
+                <select name="background_attachement">
+			<option value="">	        	                        </option>
+			<option value="fixed"<{$s_background_attachement_fixed}>>      <{$lg_fixed}>	</option>
+			<option value="scroll"<{$s_background_attachement_scroll}>>      <{$lg_scroll}>	</option>
+		</select>
+
+        </td>
+
+</tr>
+
+<tr>    <th colspan="3"> <{$lg_scrollbar}> </th></tr>
+<tr class="even">
+	<td>  &nbsp;<b><{$n_scrollbar_base_color}></b>
+
+               <input type="text" name="scrollbar_base_color" size="20" maxlength="12" value="<{$v_scrollbar_base_color}>" />
+
+        </td>
+
+	<td>  &nbsp;<b><{$n_scrollbar_3dlight_color}></b>
+
+               <input type="text" name="scrollbar_3dlight_color" size="20" maxlength="12" value="<{$v_scrollbar_3dlight_color}>" />
+
+        </td>
+
+	<td>  &nbsp;<b><{$n_scrollbar_arrow_color}></b>
+
+               <input type="text" name="scrollbar_arrow_color" size="20" maxlength="12" value="<{$v_scrollbar_arrow_color}>" />
+               
+        </td>
+
+</tr>
+
+
+<tr class="even">
+	<td>  &nbsp;<b><{$n_scrollbar_darkshadow_color}></b>
+
+               <input type="text" name="scrollbar_darkshadow_color" size="20" maxlength="12" value="<{$v_scrollbar_darkshadow_color}>" />
+
+        </td>
+
+	<td>  &nbsp;<b><{$n_scrollbar_face_color}></b>
+
+               <input type="text" name="scrollbar_face_color" size="20" maxlength="12" value="<{$v_scrollbar_face_color}>" />
+
+        </td>
+
+	<td>  &nbsp;<b><{$n_scrollbar_highlight_color}></b>
+
+               <input type="text" name="scrollbar_highlight_color" size="20" maxlength="12" value="<{$v_scrollbar_highlight_color}>" />
+               
+        </td>
+
+</tr>
+
+<tr class="even">
+	<td>  &nbsp;<b><{$n_scrollbar_shadow_color}></b>
+
+               <input type="text" name="scrollbar_shadow_color" size="20" maxlength="12" value="<{$v_scrollbar_shadow_color}>" />
+
+        </td>
+
+	<td>  &nbsp;<b><{$n_scrollbar_track_color}></b>
+
+               <input type="text" name="scrollbar_track_color" size="20" maxlength="12" value="<{$v_scrollbar_track_color}>" />
+
+        </td>
+
+	<td> &nbsp;</td>
+</tr>
+
+
+</table>
+
+
+<div style="text-align:center;">
+<button type="submit"><{$lg_submit}></button>
+</div>
+        
+
+</form>
+
+<{if !$is_options}><script type="text/javascript" language="javascript">toggle(getObject('select_options_link'), 'select_options');</script> <{/if}>
+       </div>
+
+<!-- End - Module:popgen - Template:<{$mode}> -->

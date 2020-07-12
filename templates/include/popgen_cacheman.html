@@ -1,0 +1,96 @@
+<!-- Start - Module:popgen - Template:<{$mode}> -->
+<div align="center">
+<table style="width:90%;">
+
+<tr><th>
+
+</th><th>
+        <{$lg_modulecache}>
+</th><th>
+        <{$lg_blockcache}>
+</th><th>
+        <{$lg_templatecache}>
+</th></tr>
+
+
+<tr>
+<td class="head" align="center">
+      <a href="cacheman.php?cache=^&tpl=php" title="<{$lg_all}>">
+      <img src="images/icon/cacheman.png" width="64" alt="<{$lg_all}>" /><br />
+        <{$lg_all}>
+      </a>
+      <br />
+
+</td>
+
+<td class="head" align="center">
+      <a href="cacheman.php?cache=blk_" title="<{$lg_all}>">
+      <img src="images/icon/cacheman.png" width="64" alt="<{$lg_all}> : <{$lg_modulecache}>" /><br />
+        <{$lg_module}> : <{$lg_all}>
+      </a>
+      <br />
+
+</td>
+
+<td class="head" align="center">
+      <a href="cacheman.php?cache=modules" title="<{$lg_all}>">
+        <img src="images/icon/cacheman.png" width="64" alt="<{$lg_all}> : <{$lg_blockcache}>" /><br />
+        <{$lg_block}> : <{$lg_all}>
+      </a>
+      <br />
+</td>
+
+<td class="head" align="center">
+
+      <a href="cacheman.php?tpl=php" title="<{$lg_all}>">
+        <img src="images/icon/cacheman.png" width="64" alt="<{$lg_all}>: <{$lg_templatecache}>" /><br />
+        <{$lg_template}> : <{$lg_all}>
+      </a>
+      <br />
+</td>
+</tr>
+
+
+    <{foreach item=module from=$module_datas}>
+<tr class="<{cycle values="odd,even"}>">
+
+<td align="center">
+      <a href="cacheman.php?cache=<{$module.dirname}>&tpl=<{$module.dirname}>" title="<{$module.dirname}>">
+        <img src="../<{$module.dirname}>/<{$module.image}>" alt="<{$module.dirname}>" /><br />
+        [<{$module.name}>] : <{$lg_all}>
+      </a>
+      <br />
+</td>
+
+
+<td align="center">
+    <{if $module.hasmain}>
+      <a href="cacheman.php?cache=blk_<{$module.dirname}>" title="<{$lg_modulecache}>">
+        <img src="images/icon/cacheman.png" width="64" alt="<{$lg_modulecache}>" /><br />
+      [<{$module.name}>] : <{$lg_module}>
+      </a>
+      <{/if}>
+</td>
+
+<td align="center">
+    <{if $module.hasblock}>
+      <a href="cacheman.php?cache=<{$module.dirname}>" title="<{$lg_blockcache}>">
+        <img src="images/icon/cacheman.png" width="64" alt="<{$lg_blockcache}>" /><br />
+      [<{$module.name}>] : <{$lg_block}>
+      </a>
+      <{/if}>
+</td>
+
+<td align="center">
+   <{if $module.hasblock || $module.hasmain}>
+      <a href="cacheman.php?tpl=<{$module.dirname}>^" title="<{$lg_templatecache}>">
+        <img src="images/icon/cacheman.png" width="64" alt="<{$lg_templatecache}>" /><br />
+        [<{$module.name}>] : <{$lg_template}>
+      </a>
+      <{/if}>
+</td>
+</tr>
+    <{/foreach}>
+</table>
+</div>
+<!-- End - Module:popgen - Template:<{$mode}> -->

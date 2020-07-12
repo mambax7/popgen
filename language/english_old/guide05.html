@@ -1,0 +1,348 @@
+
+<p align='center'><strong><font size='5'>Comment créer votre template personnalisé</font>
+</strong></p>
+<br />Ce petit guide &agrave; pour but de vous aider &agrave; vous constituer votre propre menu personnalis&eacute;. Nous nous attacherons &agrave; d&eacute;finir les proc&eacute;dure &agrave; respecter afin de cr&eacute;er des templates de menu. Les languages que nous aborderons seront le hmtl, Smarty et autres scripts de languages dynamiques (javascript). Il n'est donc pas n&eacute;cessaire de modificer le code php.<br />
+<br /><b>A. <u>Les bases</u></b>
+<br />
+<br />Afin de se constituer son propre template multiMenu, voici les informations minimums qu&#34;il faut conna&icirc;tre.
+<br />
+<br /><b>1) <u>Les variables smarty</u></b>
+<br />
+<br />2 types de variables sont disponibles pour cr&eacute;er vos menus.
+<br />
+<br /><b>a. Les variables de pr&eacute;f&eacute;rences du bloc : &lt;{&#36;block.variable}></b>
+<br />Elles d&eacute;finisent les pr&eacute;f&eacute;rences du bloc activ&eacute; :
+<br />
+<br />&lt;{&#36;block.format}> : Format de menu employ&eacute; (ul, ol, menu, menu_01 &agrave; 05, etc.)
+<br />&lt;{&#36;block.marquee}> : Balise marquee.
+<br />&lt;{&#36;block.columns}> : Nombre de liens &agrave; afficher avant d'activer le passage &agrave; une nouvelle colonne.
+<br />&lt;{&#36;block.block_size}> : Largeur du bloc, surtout utile pour les script n&eacute;cessitant cette information
+<br />&lt;{&#36;block.marquee_height}> : Hauteur du bloc, idem
+<br />&lt;{&#36;block.marquee_delay}> : Temps de d&eacute;lai &agrave; afficher pour les balises marquee.
+<br />&lt;{block.mm}> : Num&eacute;ro du menu en cours (valeur comprise entre 01 et 08). Cette valeur est utilis&eacute;e pour diff&eacute;rencier les variables utilis&eacute;es dans les scripts et &eacute;viter les confusions de valeurs lorsque plusieurs menu utilisant le m&ecirc;me script s'affichent dans une page.
+<br />
+<br />
+<br /><b>b. Variables de contenu : &lt;{&#36;imenu.variable}></b>
+<br />Ce sont les variables g&eacute;n&eacute;r&eacute;e par le modules et qui permettent de cr&eacute;er les liens.
+<br />&lt;{&#36;imenu.submenu}> : type de lien.
+<br />0 = lien principal
+<br />1 = lien secondaire permanents
+<br />2 = lien secondaire relatif
+<br />3 = note
+<br />4 = cat&eacute;gorie
+<br />
+<br />&lt;{&#36;imenu.title}>
+<b>: titre du lien (code actif)</b>
+<br />
+<br />&lt;{&#36;imenu.alt_title}>
+<b>: titre du lien (code d&eacute;sactiv&eacute;)</b>
+<br />
+<br /> &lt;{&#36;imenu.target}>
+<b>: balise target (_self, _blank, _parent, _child)</b>
+<br />
+<br />&lt;{&#36;imenu.link}>
+<b>: Lien constitu&eacute; (url - cible - nom de l'image). Ex : &lt;a href=&#34;http://www.monsite.com/index.php&#34; target=&#34;_self&#34; title=&#34;Mon site&#34;></b>
+<br />
+<br />&lt;{&#36;imenu.linkurl}>
+<b>: Uniquement l'url : ex : http://www.monsite.com/index.php.</b>
+<br />
+<br />&lt;{&#36;imenu.a}>
+<b>: En fonction si l'url existe ou non, prend la valeur : &lt;/a></b>
+<br />
+<br />&lt;{&#36;imenu.image}>
+<b>: Image constitu&eacute;e (url - largeur - nom de l'image). Ex : &lt;img href=&#34;http://www.monsite.com/illu.gif&#34; width=&#34;160&#34; alt=&#34;Mon site&#34; /></b>
+<br />
+<br />
+<br />
+<br /><b>2) <u>Cr&eacute;er une url</u></b>
+<br />
+<br /><b>A. M&eacute;thode simple</b>
+<br />La m&eacute;thode la plus simple est la suivante, qu'il y ait une url ou non dans le lien :
+<br />
+<br />&lt;{&#36;imenu.link}>
+<b>// Le lien complet (contenant la cible et le titre</b>
+<br />&lt;{&#36;imenu.image}>
+<b>// L'image &eacute;ventuelle</b>
+<br />&lt;{&#36;imenu.title}> <b>// Le texte &eacute;ventuel</b>
+<br />&lt;{&#36;imenu.a}>
+<b>// Le tag de fermeture &eacute;ventuel</b>
+<br />
+<br /><b>B. M&eacute;thode compl&egrave;te</b>
+<br />La deuxi&egrave;me m&eacute;thode disponible, si l'on veut conserver l'aspect de lien, ou si on utilise par exemple des classes de feuille de style, est la suivante :
+<br />
+<br />&lt;a class=&#34;mainMenu&#34;
+<b>// D&eacute;finition de la classe du lien</b>
+<br />&lt;{if &#36;imenu.link}>href=&#34;&lt;{&#36;imenu.linkurl}>&#34; &lt;{&#36;imenu.target}>&lt;{/if}><b>// L'url contenant ou non le lien</b>
+<br /> title=&#34;&lt;{&#36;imenu.alt_title}>&#34;> <b>// La balise title</b>
+<br />&lt;{&#36;imenu.image}><b>// L'image &eacute;ventuelle</b>
+<br />&lt;{&#36;imenu.title}>
+<b>// Le texte &eacute;ventuel</b>
+<br />&lt;{&#36;imenu.a}>
+<b>// Le tag de fermeture &eacute;ventuel</b>
+<br />
+<br /><b>C. M&eacute;thode diff&eacute;renti&eacute;e</b>
+<br />Enfin, la troisi&egrave;me m&eacute;thode permet d'affecter un aspect diff&eacute;rent si le lien existe ou non.
+<br />
+<br />&lt;{if &#36;imenu.link}>
+<b>// Y a-til un lien ?</b>
+<br />'>
+<b>// Oui, je cr&eacute;e un lien normal</b>
+<br />&lt;{&#36;imenu.link}>&lt;{&#36;imenu.image}>&lt;{&#36;imenu.title}>&lt;{&#36;imenu.a}>
+<br />
+<br />&lt;{else}>
+<b>// Non, alors je lui donne un autre aspect</b>
+<br />&lt;font color=&#34;red&#34;>&lt;{&#36;imenu.title}>&lt;/font>
+<br />&lt;{/if}>
+<br />
+<br />Dans le deuxi&egrave;me cas de figure on peut lui ajouter une image qui soulignera le fait qu'il s'agit d'un lien d'information ou de transition dans le cas d'un menu dynamique.
+<br />
+<br />
+<br /><b><u>3) Cr&eacute;er la liste des liens disponibles</u></b>
+<br />
+<br />Voici les codes &agrave; utiliser pour distinguer les diff&eacute;rents types de liens disponibles &agrave; int&eacute;grer :
+<br />
+<br />&lt;{foreach item=imenu from=&#36;block.contents}>
+<b>// Cr&eacute;er la boucle pour r&eacute;cup&eacute;rer les liens</b>
+<br />
+<br />&lt;{if &#36;imenu.submenu == 0}>
+<b>// Lien principal</b>
+<br />&lt;{&#36;imenu.link}>&lt;{&#36;imenu.image}>&lt;{&#36;imenu.title}>&lt;{&#36;imenu.a}>
+<br />
+<b>// Lien secondaire relatif ou permanent</b>
+<br />&lt;{elseif &#36;imenu.submenu == 1 OR &#36;imenu.submenu == 2}>
+<br />&lt;{&#36;imenu.link}>&lt;{&#36;imenu.image}>&lt;{&#36;imenu.title}>&lt;{&#36;imenu.a}>
+<br />
+<br />&lt;{elseif &#36;imenu.submenu == 3}>
+<b>// Note d'information</b>
+<br />&lt;{&#36;imenu.link}>&lt;{&#36;imenu.image}>&lt;{&#36;imenu.title}>&lt;{&#36;imenu.a}>
+<br />
+<br />&lt;{elseif &#36;imenu.submenu == 4}>
+<b>// Cat&eacute;gories</b>
+<br />&lt;h3>&lt;{&#36;imenu.link}>&lt;{&#36;imenu.image}>&lt;{&#36;imenu.title}>&lt;{&#36;imenu.a}>&lt;/h3>
+<br />&lt;{/if}>
+<br />
+<br />&lt;{/foreach}>
+<b>// Fin de la boucle
+</b>
+<br />
+<br />
+<br />4) Cr&eacute;er un tableau &agrave; plusieurs colonnes
+<br />
+<br />
+&lt;{counter start=0 print=false}>
+<b>// Cr&eacute;er le compteur</b>
+<br />
+<br />&lt;table>
+<b>// Ouvrir le tableau</b>
+<br />&lt;tr>
+<br />&lt;td>
+<br />
+<br />
+&lt;{foreach item=imenu from=&#36;block.contents}>
+<b>// Cr&eacute;er la boucle pour r&eacute;cuperer les liens</b>
+<br />
+<br />
+&lt;{if &#36;count >= &#36;block.columns_limit}>
+<b>// V&eacute;rifier si le compteur atteint la limite du nombre d'&eacute;lements</b>
+<br />&lt;/td>&lt;td>
+<b>// Si oui, cr&eacute;er une nouvelle colonne</b>
+<br />&lt;{counter start=0 print=false}>
+// Remettre le compteur &agrave; zero
+<br />&lt;{/if}>
+<b>// Fin de v&eacute;rification</b>
+<br />
+<br />&lt;{&#36;imenu.link}>&lt;{&#36;imenu.title}>&lt;{&#36;imenu.a}>
+<b>// G&eacute;n&eacute;rer le contenu du tableau</b>
+<br />
+&lt;{counter assign=count print=false}>
+<b>// Pour chaque lien, incr&eacute;menter le compteur de 1</b>
+<br />
+<br />&lt;{/foreach}>
+<b>// Fin de la boucle </b>
+<br />
+<br />&lt;/td>
+<b>// Fermer le tableau</b>
+<br />&lt;tr>
+<br />&lt;/table>
+<br />
+<br />
+<br /><b>B. <u>Les menus complexes</u></b>
+<br />
+<br />La mise en forme de menu demande des mises en place complexe dans le code. Par exemple, si vous souhaitez diff&eacute;rencier le contenu en fonction qu&#34;il s&#34;agit d&#34;un lien principal, secondaire, d&#34;une cat&eacute;gorie ou d&#34;une note, voici quelques trucs et astuces.
+<br />
+<br />
+<br /><b><u>1) Cr&eacute;er une liste &agrave; puce</u></b>
+<br />
+<br />Toute la difficult&eacute; r&eacute;side dans le fait de savoir quand ouvrir ou fermer les tags de liste. Pour cela, nous cr&eacute;ons une variable smarty &#34;url&#34; &agrave; laquelle on affectera une valeur 1 pour ouverte et 0 pour fermer. En v&eacute;rifiant l'&eacute;tat de cette valeur &agrave; chaque tour de boucle, on sait si on doit l'ouvrir ou la fermer, et ce pour les liens principaux ou les liens secondaires.
+<br />
+<br />&lt;{counter start=0 print=false}>
+<br />&lt;{assign var=ul_main value=0}>
+<b>// Initialiser la variable de liste &agrave; puce principale : ul_main</b>
+<br />&lt;{assign var=ul_sec value=0}>
+<b>// Initialiser la variable de liste &agrave; puce secondaire : ul_sec</b>
+<br /> &lt;{foreach item=imenu from=&#36;block.contents}>
+<br />
+<br />&lt;{if &#36;imenu.submenu == 0}>
+<b>// Lien principal</b>
+<br />&lt;{if &#36;ul_sec == 1}>&lt;/ul>&lt;{assign var=ul_sec value=0}>&lt;{/if}>
+<b>// Si la liste secondaire est ouverte, la fermer</b>
+<br />&lt;{if &#36;ul_main == 0}>&lt;ul>&lt;{assign var=ul_main value=1}>&lt;{/if}>
+<b>// Si la liste principale est ferm&eacute;e, l'ouvrir</b>
+<br />&lt;li>&lt;{&#36;imenu.link}>&lt;{&#36;imenu.image}>&lt;{&#36;imenu.title}>&lt;{&#36;imenu.a}>&lt;/li>
+<br />
+<br />&lt;{elseif &#36;imenu.submenu == 1 OR &#36;imenu.submenu == 2}>
+<b>// Lien secondaire</b>
+<br />&lt;{if &#36;ul_sec == 0}>&lt;ul>&lt;{assign var=ul_sec value=1}>&lt;{/if}>
+<b>// Si la liste secondaire est ferm&eacute;e, l'ouvrir</b>
+<br />
+<br />&lt;li>&lt;{&#36;imenu.link}>&lt;{&#36;imenu.image}>&lt;{&#36;imenu.title}>&lt;{&#36;imenu.a}>&lt;/li>
+<br />
+<br />&lt;{elseif &#36;imenu.submenu == 3}>
+<b>// Note</b>
+<br />&lt;{if &#36;ul_main == 1}>&lt;/ul>&lt;{assign var=ul_main value=0}>&lt;{/if}>
+<b>// Si la liste principale est ouverte, la fermer</b>
+<br />&lt;{if &#36;ul_sec == 1}>&lt;/ul>&lt;{assign var=ul_sec
+value=0}>&lt;{/if}>
+<b>// Si la liste secondaire est ouverte, la fermer</b>
+<br />&lt;{&#36;imenu.link}>&lt;{&#36;imenu.image}>&lt;{&#36;imenu.title}>&lt;{&#36;imenu.a}>&lt;/p>
+<br />
+<br />&lt;{elseif &#36;imenu.submenu == 4}>
+<b>// Cat&eacute;gorie</b>
+<br />&lt;{if &#36;ul_main == 1}>&lt;/ul>&lt;{assign var=ul_main value=0}>&lt;{/if}>
+<b>// Si la liste principale est ouverte, la fermer</b>
+<br />&lt;{if &#36;ul_sec == 1}>&lt;/ul>&lt;{assign var=ul_sec
+value=0}>&lt;{/if}>
+<b>// Si la liste secondaire est ouverte, la fermer</b>
+<br />&lt;{&#36;imenu.link}>&lt;{&#36;imenu.image}>&lt;h3>&lt;{&#36;imenu.title}>&lt;/h3>&lt;{&#36;imenu.a}>
+<br />&lt;{/if}>
+<br />&lt;{/foreach}>
+<br /><span style='mso-tab-count: 11'>
+<b>// Apr&egrave;s avoir fait le tour des liens existant, v&eacute;rifier ce qu'il reste &agrave; fermer</b>
+<br />&lt;{if &#36;ul_main == 1}>&lt;/ul>&lt;{/if}>
+<b>// Si la liste principale est ouverte, la fermer</b>
+<br />
+&lt;{if &#36;ul_sec == 1}>&lt;/ul>&lt;{/if}>
+<b>// Si la liste secondaire est ouverte, la fermer</b>
+<br />
+<br />
+<br />
+<br /><b><u>2) Cr&eacute;er un menu dynamique en v&eacute;rifiant si un lien principal dispose de sous-liens</u></b>
+<br />
+<br />La difficult&eacute; des listes dynamiques est de pr&eacute;voir si un lien principal dispose de sous-liens, puisque multiMenu affiche les liens les uns apr&egrave;s les autres. La seule fa&ccedil;on de proc&eacute;der est de &#34;retarder&#34; l'affichage des liens en cr&eacute;ant une sorte de tampon. Les valeurs en cours s'&eacute;civent :
+&#36;imenu.submenu, les valeurs en cache s'&eacute;crivent &#36;submenu. Dans le script ci-dessous, nous avons inclu la gestion des liens sous forme de liste &agrave; puce.
+<br />
+<br /> &lt;{counter start=0 print=false}>
+<br /> &lt;{counter assign=count print=false}>
+<br />&lt;{assign var=ul value=0}>
+<br />
+<br />&lt;{foreach item=imenu from=&#36;block.contents}>
+<b>// Cr&eacute;er la boucle pour r&eacute;cuperer les liens</b>
+<br />&lt;{if &#36;submenu == &#34;0&#34;}>
+<b>// Le lien en cache est un lien principal. En m&ecirc;me temps, on v&eacute;rifie s'il existe d&eacute;j&agrave; une valeur en cache, dans le cas contraire, on passe un tour et on affiche rien (valeur &eacute;gale &#34;0&#34; et non 0).</b>
+<br />&lt;{if &#36;ul == 0}>&lt;ul>&lt;{assign var=ul value=1}>&lt;{/if}>
+<br />&lt;!-- Main link -->
+<br />
+&lt;{if &#36;imenu.submenu == &#34;1&#34; OR &#36;imenu.submenu == &#34;2&#34;}>
+<b>// Si le lien en cours est un lien secondaire, on sait que le lien en cache doit disposer du script d'activation des liens secondaire</b>
+<br />&lt;li class=&#34;popgen&#34;>
+<br />
+&lt;a title=&#34;&lt;{&#36;alt_title}>&#34;
+<b>// Cr&eacute;er le lien en cache avec le script, puisqu'il dispose d'au moins un lien secondaire</b>
+<br />
+&lt;{if &#36;linkurl}>&lt;{&#36;target}>href=&#34;&lt;{&#36;linkurl}>&#34;&lt;{else}>onClick=&#34;return clickreturnvalue03()&#34;&lt;{/if}>
+<br />
+onMouseover=&#34;dropdownmenu03(this, event, menu&lt;{&#36;block.mm}>&lt;{&#36;count}>, menuwidth)&#34;
+<br />onMouseout=&#34;delayhidemenu03()&#34;>
+<br />
+&lt;img src=&#34;&lt;{&#36;xoops_url}>/modules/multiMenu/script/images/arrow1.gif&#34; alt=&#34;&lt;{&#36;alt_title}>&#34; /> // Le lien en cours est un lien secondaire, donc on affiche une fl&egrave;che sur le lien en cache
+<br />&lt;{else}>
+<b>// Le lien en cours n'est pas un lien secondaire, donc on ne met pas une fl&egrave;che et on d&eacute;sactive le script pour le lien en cache</b>
+<br />&lt;li class=&#34;popgen&#34;>
+<br /> &lt;a title=&#34;&lt;{&#36;alt_title}>&#34;
+<br /> &lt;{if &#36;linkurl}>&lt;{&#36;target}>href=&#34;&lt;{&#36;linkurl}>&#34;&lt;{/if}>>
+<br />&lt;{/if}>
+<br /> &lt;{&#36;image}>
+<br />&lt;{&#36;title}>
+<br /> &lt;/a>
+<br /> &lt;/li>
+<br />
+<br />&lt;{counter assign=count print=false}>
+<br />&lt;{elseif &#36;submenu == &#34;3&#34;}>
+<b>// Le menu en cache est une note</b>
+<br />&lt;{if &#36;ul == 1}>&lt;/ul>&lt;/div>&lt;{assign var=ul value=0}>&lt;{/if}>
+<br />&lt;!-- Note -->
+<br />&lt;div class=&#34;menuNote&#34;>&lt;{&#36;link}>&lt;{&#36;image}>&lt;{&#36;title}>&lt;{&#36;a}>&lt;/div>
+<br /> &lt;{counter assign=count print=false}>
+<br />
+<br />&lt;{elseif &#36;submenu == &#34;4&#34;}>
+<b>// Le menu en cache est une cat&eacute;gorie</b>
+<br />&lt;!-- Categorie -->
+<br />&lt;{if &#36;ul == 1}>&lt;/ul>&lt;/div>&lt;{assign var=ul value=0}>&lt;{/if}>
+<br />&lt;div class=&#34;menuCat&#34;>&lt;h3>&lt;{&#36;link}>&lt;{&#36;image}>&lt;{&#36;title}>&lt;/h3&lt;/div>
+<br />&lt;{/if}>
+<br />
+<br />&lt;{assign var=submenu
+value=&#36;imenu.submenu}>
+<b>// R&eacute;cup&eacute;ration des valeurs du lien en cours pour les mettre en cache</b>
+<br />&lt;{assign var=linkurl
+value=&#36;imenu.linkurl}>
+<b>// Ces valeurs seront utilis&eacute;es pour afficher le lien lors du tours suivant</b>
+<br /> &lt;{assign var=link value=&#36;imenu.link}>
+<br /> &lt;{assign var=counter value=&#36;count}>
+<br /> &lt;{assign var=target value=&#36;imenu.target}>
+<br /> &lt;{assign var=alt_title value=&#36;imenu.alt_title}>
+<br /> &lt;{assign var=image value=&#36;imenu.image}>
+<br /> &lt;{assign var=title value=&#36;imenu.title}>
+<br /> &lt;{assign var=a value=&#36;imenu.a}>
+<br />
+<br />&lt;{/foreach}>
+<b>// Fin de la boucle </b>
+<br />
+<br />&lt;{if &#36;submenu == &#34;0&#34;}>
+<b>// Du fait de la mise en cache des liens, et que les liens en cours ont pass&eacute; le premier tour, nous affichons la derni&egrave;re valeure qui reste en cache</b>
+<br /> &lt;{if &#36;ul == 0}>&lt;ul>&lt;{/if}>
+<br /> &lt;!-- Main link -->
+<br />
+&lt;{if &#36;imenu.submenu == &#34;1&#34; OR &#36;imenu.submenu == &#34;2&#34;}>
+<br /> &lt;li class=&#34;popgen&#34;>
+<br /> &lt;a title=&#34;&lt;{&#36;alt_title}>&#34;
+<br /> &lt;{if &#36;linkurl}>&lt;{&#36;target}> href=&#34;&lt;{&#36;linkurl}>&#34;&lt;{else}>onClick=&#34;return clickreturnvalue03()&#34;&lt;{/if}>
+<br /> onMouseover=&#34;dropdownmenu03(this, event, menu&lt;{&#36;block.mm}>&lt;{&#36;count}>, menuwidth)&#34;
+<br /> onMouseout=&#34;delayhidemenu03()&#34;>
+<br /> &lt;img src=&#34;&lt;{&#36;xoops_url}>/modules/multiMenu/script/images/arrow1.gif&#34; alt=&#34;&lt;{&#36;alt_title}>&#34; align=&#34;left&#34; />
+<br />&lt;{else}>
+<br /> &lt;li class=&#34;popgen&#34;>
+<br /> &lt;a&lt;{if &#36;linkurl}>&lt;{&#36;target}> href=&#34;&lt;{&#36;linkurl}>&#34;&lt;{/if}> title=&#34;&lt;{&#36;alt_title}>&#34;>
+<br />&lt;{/if}>
+<br /> &lt;{&#36;image}>
+<br /> &lt;{&#36;title}>
+<br /> &lt;/a>
+<br /> &lt;/li>
+<br />
+<br /> &lt;{elseif &#36;submenu == &#34;3&#34;}>
+<br /> &lt;{if &#36;ul == 1}>&lt;/ul>&lt;{/if}>
+<br /> &lt;!-- Note -->
+<br />&lt;div class=&#34;menuNote&#34;>&lt;{&#36;link}>&lt;{&#36;image}>&lt;{&#36;title}>&lt;{&#36;a}>&lt;/div>
+<br />
+<br /> &lt;{elseif &#36;submenu == &#34;4&#34;}>
+<br /> &lt;{if &#36;ul == 1}>&lt;/ul>&lt;{/if}>
+<br /> &lt;!-- Categorie -->
+<br />&lt;div class=&#34;menuCat&#34;>&lt;h3>&lt;{&#36;link}>&lt;{&#36;image}>&lt;{&#36;title}>&lt;{&#36;a}>&lt;/h3&lt;/div>
+<br /> &lt;{/if}>
+<br /> &lt;{if &#36;ul == 1}>&lt;/ul>&lt;{/if}>
+<br /><br /><br />
+<b>Personnaliser le style d'affichage en fonction du thème en cours.</b><br />
+La variable Smarty suivante est disponible :<br/><br />
+<textarea rows='1'><{&#36;block.css_file}></textarea>
+<br /><br />
+Utilisable dans les templates de menu, elle permet (entre autre) d'attribuer un style particulier à vos menus, en fonction du thème utilisé.<br />
+Exemple d'utilisation :<br /><br />
+<textarea rows='7'>
+<{if &#36;block.css_file =='default'}>
+<link rel='stylesheet' type='text/css' href='<{$xoops_url}>/modules/multiMenu/css/default.css' />
+<{else}>
+<link rel='stylesheet' type='text/css' href='<{$xoops_url}>/modules/multiMenu/css/second.css' />
+<{/if}>
+</textarea>
+<br /><br />
+Si le thème en cours, est celui par défaut, alors une certaine feuille de style est chargée, et si un autre thème est chargé, alors la feuille de style alternative la remplacera.

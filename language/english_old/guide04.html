@@ -1,0 +1,193 @@
+<p align='center'><strong><font size='5'>Comment utiliser multiMenu ?</font></strong></p><br />
+<br />
+<strong><u>Blocs multiMenu</u></strong><br />
+<br />
+Une des fonctionnalités la plus importante de multiMenu sont ses blocs. Comme vu précédement, vous avez pour chaque menu un bloc correspondant (classé de 1 à 7 + celui d'administration), plus 2 autres blocs personnalisés (A et B). Pour chaque bloc, vous avez un large choix d'utilisation, d'affichage et d'options.<br /><br />Lorsque vous éditez un bloc multiMenu, vous trouvez des paramètres, classés en 6 catégories.<br />
+<br />
+<strong>1) Format de Bloc</strong><br />
+<br />
+<strong><em>~Format:</em></strong><br />
+Vous pouvez afficher les liens sous 20 formes différentes :<br />
+- Menu Standard (comme le Menu Principal)<br />
+- Switch Vertical (un clic gauche déroule les menus secondaires)<br />
+- Déroulant vertical (menu dynamique vertical - les menus se déroulent vers la gauche ou la droite)<br />
+- Déroulant vertical 2 (autre type de menu vertical - même fonctions que le vertical)<br />
+- Déroulant vertical CSS (pur CSS)<br />
+- Déroulant horizontal (menu dynamique horizontal - les menus se déroulent vers le bas)<br />
+- Déroulant horizontal CSS (menu dynamique horizontal en pur CSS- les menus se déroulent vers le bas)<br />
+- Liens horizontaux<br />
+- Contextuel<br />
+- Contextuel2 : gère les liens secondaires (permanents et relatifs)<br />
+- Menu avec arborescence (arbre, type explorateur windows)<br />
+- Image fixe<br />
+- Image défilante (défilement sans pause)<br />
+- Image diaporama (défilement avec pause)<br />
+- Liste à puces<br />
+- Liste à chiffre (à condition que la feuille de style soit bien configurée : balise ol)<br />
+- Liste défilante (défilement sans pause)<br />
+- Liste diapo (défilement avec pause à la fin)<br />
+- Liste déroulante<br />
+- Boîte de sélection<br />
+<br />
+<strong><em>~Nombre de colonnes :</em></strong><br />
+Définit sur quel nombre de colonnes les liens doivent être affichés. Cette option est valable seulement pour les menus standards et ceux avec une image non défilante.<br />
+<br />
+<strong>2) Liens</strong><br />
+<br />
+<strong><em>~Type de liens à afficher :</em></strong><br />
+Définit le type de liens à afficher parmi tous les types de liens. <br />
+<strong><em>~Trié par :</em></strong><br />
+Ordre dans lequel vous voulez afficher les liens : par poids (définit dans l'admin) ou par ordre alphabétique (descendant ou ascendant).<br />
+<br />
+<strong>3) Titres</strong><br />
+<br />
+<strong><em>~Afficher le titre :</em></strong><br />
+Voulez-vous afficher le titre du lien. Cette option doit être utilisée uniquement avec les liens qui ont une image d'illustration !<br />
+<strong><em>~Longeur max. :</em></strong><br />
+Longueur maximale du titre ? Définissez la valeur maximale ici.<br />
+<br />
+<strong>4) Image</strong><br />
+<br />
+<strong><em>~Afficher l'image :</em></strong><br />
+Voulez-vous afficher l'image ?.<br />
+<strong><em>~Largeur max. :</em></strong><br />
+Définit la largeur maximale de l'image afin de garder un aspect uniforme de vos illustrations et menus. Si l'image est plus petite, elle ne sera pas redimensionnée pour éviter un effet de pixellisation.<br />
+<br />
+<strong>5) Paramètres de défilement</strong><br />
+<br />Ces options s'appliquent seulement si vous choisissez le format 'Images défilantes'.<br />
+<strong><em>~Hauteur et largeur de bloc :</em></strong><br />
+Définit la taille générale du bloc. Vérifiez la l'option de largeur d'image pour affiner le réglage.<br />
+<strong><em>~Vitesse :</em><br /></strong>
+Définit la vitesse générale de défilement de vos lien et images. <br />
+<br />
+<strong>6) Liens aléatoires</strong><br />
+<br />
+<strong><em>~Liens aléatoires :</em></strong></strong><br />
+multiMenu vous donne la possibilité  d'afficher une sélection de liens aléatoires. Définit ici si vous le voulez ou non. Bien entendu, cette option doit être utilisée avec précaution si vous utilisez différents types de liens (catégorie, liens principal, lien secondaire et note) et fonctionne mieux avec un seul type de lien.<br />
+<strong><em>~Nombre de liens aléatoires à afficher :</em></strong><br />
+Cette option définit le nombre de lien aléatoire à afficher. Gardez à l'esprit que cela affichera X liens après le premier lien aléatoire choisi. <br /><br />
+
+<b>Concernant les blocs personnalisés A et B :</b><br />
+Ce sont des blocs complémentaires, non liés à un menu en particulier.<br />
+Dans les préférences du blocs, ont peu lui affecter tel ou tel menu déjà créé.<br />
+L'intérêt ? Vous pouvez par exemple afficher un même menu, sous 2 formes différentes. (un sous forme de menu dynamique, et l'autre sous forme de menu déroulant par exemple).<br />
+Vous pouvez afficher les 2 menus sur la même page, ou répartir ces 2 mêmes menus (mais blocs différents), à divers endroits du site.<br /><br />
+
+<b>Intégration de menus directement dans le thème :</b><br />
+Exemple avec le menu horizontal dynamique, en 3 étapes :<br /><br />
+<b>1)</b> Activer le bloc du menu voulu, au format dynamique horizontal<br />
+Dans les préférences mettre comme titre de bloc : 'navbar' et le positionner en colonne de gauche.<br /><br />
+<b>2)</b> Editer le fichier theme.html (ou theme.php), et positionner le code suivant à l'emplacement où l'on veut afficher le menu :<br /><br />
+
+<textarea rows='5'>
+<{foreach item=block from=&#36;xoops_lblocks}>
+  <{if &#36;block.title == 'navbar'}>
+    <{&#36;block.content}>
+  <{/if}>
+<{/foreach}>
+</textarea>
+<br /><br />
+
+<b>3)</b> Ensuite, repérer le code smarty utilisé pour générer les blocs de gauche et changer comme suit :
+<br /><br />
+Avant :
+<br /><br />
+<textarea rows='3'>
+<{foreach item=block from=&#36;xoops_lblocks}>
+   <{include file='default/theme_blockleft.html'}>
+<{/foreach}>
+</textarea>
+<br /><br />
+
+Après :
+<br /><br />
+<textarea rows='5'>
+<{foreach item=block from=&#36;xoops_lblocks}>
+  <{if &#36;block.title != 'navbar'}>
+   <{include file='default/theme_blockleft.html'}>
+  <{/if}>
+<{/foreach}>
+</textarea>
+<br /><br />
+<i>Noter les infos suivantes.</i>
+<br /><br />
+- 'navbar' est le nom du bloc menu qui doit s'afficher ou non.
+<br /><br />
+- Le premier code affiche le ou les blocs de gauche ayant pour titre 'navbar'.
+<br /><br />
+- Le deuxième code affiche tous les blocs, sauf celui (ou ceux) ayant pour titre 'navbar'.
+<br />
+<br /><br />
+
+<b>Afficher le contenu d'un menu sans le titre du bloc</b><br />
+
+Pour certains menus, et pour une meilleur ergonomie, vous pouvez souhaiter afficher seulement le contenu du menu, sur la gauche, la droite ou le centre de votre site, tout en cachant le titre du bloc.<br />
+Le code se rapproche beaucoup de celui vu précédement, pour l'intégration d'un menu dans votre thème.<br />
+Par exemple, j'ai un menu situé dans la colonne de gauche, qui se nomme <b>Tree</b>.<br />
+J'édite donc mon thème, et je cherche la séquence qui affiche les blocs de gauche.<br />
+Je trouve le code suivant :<br /><br />
+
+<textarea rows='9'>
+<{foreach item=block from=&#36;xoops_lblocks}>
+<table cellspacing='0' cellpadding='2'>
+<tr>
+<td class='blockTitle'>&nbsp;<{&#36;block.title}></td>
+</tr>
+<tr>
+<td class='blockContent'><{&#36;block.content}></td>
+</tr></table><br />
+<{/foreach}>
+</textarea>
+<br /><br />
+
+Et je le modifie de la façon suivante :<br /><br />
+
+<textarea rows='11'>
+<{foreach item=block from=&#36;xoops_lblocks}>
+<table cellspacing='0' cellpadding='2'>
+<{if &#36;block.title != 'Tree'}>
+<tr>
+<td class='blockTitle'>&nbsp;<{&#36;block.title}></td>
+</tr>
+<{/if}>
+<tr>
+<td class='blockContent'><{&#36;block.content}></td>
+</tr></table><br />
+<{/foreach}>
+</textarea>
+<br /><br />
+Si le titre du bloc est <b>Tree</b>, alors je ne l'affiche pas.<br />
+On peut procéder ainsi pour plusieurs blocs si nécessaire.<br />
+Prenons <b>Tree1</b> et <b>Tree2</b>.<br>
+Le test devient alors : <br /><br />
+<textarea rows='1'>
+<{if &#36;block.title != 'Tree1' AND &#36;block.title != 'Tree2' }>
+</textarea>
+
+<br />
+<br /><br />
+<b>Changer rapidement l'ordre d'affichage d'un lien  :</b><br />
+Vous souhaitez ajouter un nouveau lien tout en haut de votre menu ?<br /><br />
+Vous avez sans doute remarqué les flèches vertes qui permettent de faire monter et descendre les liens, mais qui ne sont pas très pratiques lorsque votre bloc contient de très nombreux liens...<br />
+Voici une astuce pour positionner rapidement et facilement un lien à un endroit choisit :<br /><br />
+
+1er clic : Ajoutez un lien<br />
+2ème clic: Montez le d'un cran<br />
+3ème clic : Modifiez dans l'adresse (URL), le poids weight et le tour est joué !<br /><br />
+
+Par exemple, on change le lien :<br /><br />
+
+<i>http://monsite.fr/modules/multiMenu/admin/index.php?op=move&id=18&weight=<b>21</b>&Menu=01<br /></i>
+
+<br />
+en<br /><br />
+
+<i>http://monsite.fr/modules/multiMenu/admin/index.php?op=move&id=18&weight=<b>1</b>&Menu=01</i>
+
+<br />
+<br />
+Et on valide. Le lien se retrouve alors en première position.<br />
+La valeur de poids peut varier en fonction de l'endroit où on veut le positionner...<br />
+
+
+<br /><br />Merci d'avoir choisi multiMenu, comme toujours, nous sommees heureux de recevoir vos commentaires et retours afin de continuer à améliorer la qualité et les possibilités de ce module.<br /><br />- Les auteurs

@@ -1,0 +1,40 @@
+
+<!-- Start - Module:popgen - Template:<{$mode}> -->
+
+<{if $css_link}>
+<link rel="stylesheet" type="text/css" media="all" href="<{$xoops_url}><{$css_link}>" />
+<{/if}>
+
+<{if $script_link}>
+<script language="JavaScript"
+        type="text/javascript" 
+        src="<{$xoops_url}><{$script_link}>">
+        </script>
+<{/if}>
+
+<{if $banner}><div align="center"><{$banner}></div><p /><{/if}>
+
+<{$nav}>
+
+<div class="item"<{if $background}> style="background: url('<{$background}>') transparent no-repeat 75% top;"<{/if}>>
+
+<{if $texte||$image}>
+  <div class="itemText">
+  <{if $image}><img src="<{$image}>" align="left" alt="" /><{/if}>
+  <{$texte}>
+  </div>
+<{/if}>
+
+<{include file="db:$mode"}>
+
+<{if $admin}>
+     <table class="itemAdmin">
+     <tr>
+       <td width="80%"><{$admin}></td>
+       <td><{$admin_settings}></td>
+     </tr>
+     </table>
+<{/if}>
+
+</div>
+<!-- End - Module:popgen - Template:<{$mode}> -->
